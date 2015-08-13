@@ -26,6 +26,14 @@ namespace TicTacToe.Specs
         /// <param name="column">Column in which to play. Use 0-2</param>
         public void PlayTurn(PlayerType playerType, int row, int column)
         {
+            ValidateTurn(row, column);
+
+            Board[row, column] = playerType;
+            return;
+        }
+
+        private void ValidateTurn(int row, int column)
+        {
             if (row > 2 || row < 0)
             {
                 throw new ArgumentException("Row value must be between 0 and 2");
@@ -36,8 +44,11 @@ namespace TicTacToe.Specs
                 throw new ArgumentException("Column value must be between 0 and 2");
             }
 
-            Board[row, column] = playerType;
-            return;
+            //Protect against double plays
+            if (Board[row, column] != null)
+            {
+                throw new DoublePlayException();
+            }
         }
 
         /// <summary>
