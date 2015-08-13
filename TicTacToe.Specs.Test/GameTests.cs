@@ -68,6 +68,20 @@ namespace TicTacToe.Specs.Test
             g.PlayTurn(playerType, 2, 3);
 
         }
+        [TestMethod]
+        [ExpectedException(typeof(PositionTakenException))]
+        public void GameDoesNotAllowRepeatedPlayInPosition()
+        {
+            var g = new Game();
+            var playerType = PlayerType.X;
+
+            g.PlayTurn(playerType, 2, 2);
+            g.PlayTurn(PlayerType.O, 0, 2);
+            
+            //Should throw Ex:
+            g.PlayTurn(playerType, 2, 2);
+
+        }
 
         [TestMethod]
         [ExpectedException(typeof(DoublePlayException))]
@@ -93,5 +107,16 @@ namespace TicTacToe.Specs.Test
 
             Assert.AreEqual(playerType, g.Board[0, 0]);
         }
+
+        //[TestMethod]
+        ////public void GameClaimsWinner()
+        //{
+        //    var g = new Game();
+        //    var playerType = PlayerType.O;
+
+        //    g.PlayTurn(playerType, 0, 0);
+
+        //    Assert.AreEqual(playerType, g.Board[0, 0]);
+        //}
     }
 }

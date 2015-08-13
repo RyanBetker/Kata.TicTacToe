@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace TicTacToe.Specs
 {
     /// <summary>
-    /// A player attempted to play twice
+    /// Turn was tried in a spot already taken
     /// </summary>
-    public class DoublePlayException : Exception
+    public class PositionTakenException : Exception
     {
-        public DoublePlayException()
+        public PositionTakenException()
         {
 
         }
