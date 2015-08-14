@@ -108,15 +108,52 @@ namespace TicTacToe.Specs.Test
             Assert.AreEqual(playerType, g.Board[0, 0]);
         }
 
-        //[TestMethod]
-        ////public void GameClaimsWinner()
-        //{
-        //    var g = new Game();
-        //    var playerType = PlayerType.O;
+        [TestMethod]
+        public void GameHasNoWinnerWithoutLine()
+        {
+            var g = new Game();
+            var playerType = PlayerType.O;
 
-        //    g.PlayTurn(playerType, 0, 0);
+            g.PlayTurn(playerType, 0, 0);
+            g.PlayTurn(PlayerType.X, 2, 0);
+            g.PlayTurn(playerType, 0, 1); 
+            PlayerType? winner = g.DetermineWinner();
 
-        //    Assert.AreEqual(playerType, g.Board[0, 0]);
-        //}
+            Assert.AreEqual(null, winner);
+        }
+
+        [TestMethod]
+        public void GameWithLineOHasWinner()
+        {
+            var g = new Game();
+            var playerType = PlayerType.O;
+            var secondPlayer = PlayerType.X;
+
+            g.PlayTurn(playerType, 0, 0);
+            g.PlayTurn(secondPlayer, 2, 0);
+            g.PlayTurn(playerType, 0, 1);
+            g.PlayTurn(secondPlayer, 2, 1);
+            g.PlayTurn(playerType, 0, 2);
+            PlayerType? winner = g.DetermineWinner();
+
+            Assert.AreEqual(playerType, winner);
+        }
+
+        [TestMethod]
+        public void GameWithLineXHasWinner()
+        {
+            var g = new Game();
+            var playerType = PlayerType.X;
+            var secondPlayer = PlayerType.O;
+
+            g.PlayTurn(playerType, 0, 0);
+            g.PlayTurn(secondPlayer, 2, 0);
+            g.PlayTurn(playerType, 0, 1);
+            g.PlayTurn(secondPlayer, 2, 1);
+            g.PlayTurn(playerType, 0, 2);
+            PlayerType? winner = g.DetermineWinner();
+
+            Assert.AreEqual(playerType, winner);
+        }
     }
 }

@@ -64,5 +64,26 @@ namespace TicTacToe.Specs
         /// First position is for rows, second is columns
         /// </summary>
         public PlayerType?[,] Board { get; private set; }
+
+        public PlayerType? DetermineWinner()
+        {
+            int row = 0;
+            PlayerType? winner;
+            if ((winner = RowHasWinner(row)) != null)
+            {
+                return winner;
+            }
+
+            return null;
+        }
+
+        private PlayerType? RowHasWinner(int row)
+        {
+            if (Board[row, 0] == Board[row, 1] && Board[row, 1] == Board[row, 2])
+            {
+                return Board[row, 0];
+            }
+            return null;
+        }
     }
 }
