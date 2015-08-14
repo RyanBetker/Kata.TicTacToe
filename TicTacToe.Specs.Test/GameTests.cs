@@ -85,7 +85,7 @@ namespace TicTacToe.Specs.Test
 
         [TestMethod]
         [ExpectedException(typeof(DoublePlayException))]
-        public void GameDoesNotAllowDoublePlayInPosition()
+        public void GameDoesNotAllowDoublePlay()
         {
             var g = new Game();
             var playerType = PlayerType.X;
@@ -93,7 +93,7 @@ namespace TicTacToe.Specs.Test
             g.PlayTurn(playerType, 2, 2);
 
             //Should throw Ex:
-            g.PlayTurn(playerType, 2, 2);
+            g.PlayTurn(playerType, 1, 2);
 
         }
 
